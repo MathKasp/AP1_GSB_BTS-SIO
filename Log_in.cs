@@ -60,11 +60,18 @@ namespace AP1_GSB_BTS_SIO
                 Comptable,
                 Administrateur
             }
+            public Utilisateur(int ID_Utilisateur, string nom, string mdp, UtilisateurRole ID_role)
+            {
+                this.ID_Utilisateur = ID_Utilisateur;
+                this.nom = nom;
+                this.mdp = mdp;
+                this.ID_role = ID_role;
+            }
         }
         //
 
 
-        // Outillage des composant du form 
+        // Outillage des composants du form 
 
         // Variables par défault de la selection de l'utilisateur
         public string nom = "";
@@ -93,7 +100,7 @@ namespace AP1_GSB_BTS_SIO
                 {
                     case 1 :
 
-                        Visiteur OuvreEspaceVisiteur = new Visiteur();
+                        Visiteur OuvreEspaceVisiteur = new Visiteur(idUtilisateur);
                         OuvreEspaceVisiteur.ShowDialog();
 
                         break;
