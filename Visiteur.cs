@@ -22,8 +22,9 @@ namespace AP1_GSB_BTS_SIO
             InitializeComponent();
         }
 
-        // Option co et deco de la bdd
 
+        // Option co et deco de la bdd
+        #region
         public MySqlConnection Connection;
 
         private void ConnectionBDD()
@@ -44,12 +45,11 @@ namespace AP1_GSB_BTS_SIO
         {
             Connection.Close();
         }
-
+        #endregion
         //
 
 
-
-        // Outillage des composants du form 
+        // Outillage des composants du form //
 
         // Bouton simples
         #region
@@ -75,13 +75,15 @@ namespace AP1_GSB_BTS_SIO
         {
             ConnectionBDD();
 
+            ListviewFrais.Items.Clear();
 
             // On Récupère donnee Frais Forfais 
             MySqlCommand cmd = new MySqlCommand("" +
                 "SELECT ff.valeur_total, ff.date_frais, tf.nom " +
-                "FROM `fiche_de_frais` fdf left join `frais_forfait` ff on fdf.id_fiche_frais = ff.id_fiche_frais " +
-                "left join `type_frais` tf on ff.id_type = tf.id_type " + 
-                "WHERE fdf.id_utilisateur = @utilisateur ;", Connection);
+                "FROM `fiche_de_frais` fdf left join `frais_forfait` ff " +
+                "on fdf.id_fiche_frais = ff.id_fiche_frais left join `type_frais` tf " +
+                "on ff.id_type = tf.id_type WHERE fdf.id_utilisateur = @utilisateur " +
+                "AND fdf.date_creation <= DATE_FORMAT(NOW(), '%Y-%m-%d') <= fdf.date_fin;", Connection);
 
             cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
 
@@ -101,12 +103,15 @@ namespace AP1_GSB_BTS_SIO
             LecteurDonnee.Close();
             //
 
-            // On récupère les donnee Frais Hors Forfait
+            ListViewHorsForfait.Items.Clear ();
 
+            // On récupère les donnee Frais Hors Forfait
             cmd = new MySqlCommand("" +
             "SELECT fhf.nom, fhf.valeur, fhf.date_frais " +
             "FROM `fiche_de_frais` fdf left join `frais_hors_forfait` fhf " +
-            "on fhf.id_fiche_frais = fdf.id_fiche_frais WHERE fdf.id_utilisateur = @utilisateur ;", Connection);
+            "on fhf.id_fiche_frais = fdf.id_fiche_frais " +
+            "WHERE fdf.id_utilisateur = @utilisateur " +
+            "AND fdf.date_creation <= DATE_FORMAT(NOW(), '%Y-%m-%d') <= fdf.date_fin;", Connection);
 
             cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
 
@@ -114,26 +119,53 @@ namespace AP1_GSB_BTS_SIO
 
             while (LecteurDonnee.Read())
             {
-                ListViewItem FraisForfait = new ListViewItem(
+                ListViewItem FraisHForfait = new ListViewItem(
 
                 LecteurDonnee["nom"].ToString());
-                FraisForfait.SubItems.Add(LecteurDonnee["valeur"].ToString());
-                FraisForfait.SubItems.Add(LecteurDonnee["date_frais"].ToString());
+                FraisHForfait.SubItems.Add(LecteurDonnee["valeur"].ToString());
+                FraisHForfait.SubItems.Add(LecteurDonnee["date_frais"].ToString());
 
-                ListViewHorsForfait.Items.Add(FraisForfait);
+                ListViewHorsForfait.Items.Add(FraisHForfait);
             }
 
             LecteurDonnee.Close();
 
             //
+
+            // Affichage de la date debut / Fin de la fiche observé
+            cmd = new MySqlCommand("" +
+            "SELECT fdf.date_creation, fdf.date_fin " +
+            "FROM `fiche_de_frais` fdf WHERE date_creation <= DATE_FORMAT(NOW(), '%Y-%m-%d') <= date_fin " +
+            "AND fdf.id_utilisateur = @utilisateur;", Connection);
+
+            cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
+
+            LecteurDonnee = cmd.ExecuteReader();
+
+            if (LecteurDonnee.Read())
+            {
+                string DateDeb = LecteurDonnee["date_creation"].ToString();
+                string DateFinn = LecteurDonnee["date_fin"].ToString();
+                    
+                DateDepart.Text = DateDeb;
+                DateFin.Text = DateFinn;
+            }
+
+            LecteurDonnee.Close();
+            //
+
             DeconnectionBDD();  
         }
         #endregion
-        //
+        // - //
 
         private void Historique(object sender, EventArgs e)
         {
+            ConnectionBDD();
 
+
+
+            DeconnectionBDD();
         }
 
         private void Demande_Frais(object sender, EventArgs e)

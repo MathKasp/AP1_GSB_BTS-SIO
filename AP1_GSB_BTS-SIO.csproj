@@ -110,6 +110,12 @@
     <Compile Include="Comptable.Designer.cs">
       <DependentUpon>Comptable.cs</DependentUpon>
     </Compile>
+    <Compile Include="AjoutFrais.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AjoutFrais.Designer.cs">
+      <DependentUpon>AjoutFrais.cs</DependentUpon>
+    </Compile>
     <Compile Include="Log_in.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,9 @@
     </Compile>
     <EmbeddedResource Include="Administrateur.resx">
       <DependentUpon>Administrateur.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AjoutFrais.resx">
+      <DependentUpon>AjoutFrais.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comptable.resx">
       <DependentUpon>Comptable.cs</DependentUpon>

@@ -55,6 +55,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -150,7 +154,7 @@
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.button1.Location = new System.Drawing.Point(36, 150);
+            this.button1.Location = new System.Drawing.Point(36, 192);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(201, 124);
             this.button1.TabIndex = 2;
@@ -164,7 +168,7 @@
             this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.button3.Location = new System.Drawing.Point(36, 271);
+            this.button3.Location = new System.Drawing.Point(36, 616);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(201, 124);
             this.button3.TabIndex = 3;
@@ -178,7 +182,7 @@
             this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.button4.Location = new System.Drawing.Point(36, 392);
+            this.button4.Location = new System.Drawing.Point(36, 435);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(201, 124);
             this.button4.TabIndex = 4;
@@ -195,7 +199,7 @@
             this.ListviewFrais.HideSelection = false;
             this.ListviewFrais.Location = new System.Drawing.Point(28, 64);
             this.ListviewFrais.Name = "ListviewFrais";
-            this.ListviewFrais.Size = new System.Drawing.Size(732, 156);
+            this.ListviewFrais.Size = new System.Drawing.Size(792, 156);
             this.ListviewFrais.TabIndex = 5;
             this.ListviewFrais.UseCompatibleStateImageBehavior = false;
             this.ListviewFrais.View = System.Windows.Forms.View.Details;
@@ -225,7 +229,7 @@
             this.ListViewHorsForfait.HideSelection = false;
             this.ListViewHorsForfait.Location = new System.Drawing.Point(287, 383);
             this.ListViewHorsForfait.Name = "ListViewHorsForfait";
-            this.ListViewHorsForfait.Size = new System.Drawing.Size(732, 156);
+            this.ListViewHorsForfait.Size = new System.Drawing.Size(792, 156);
             this.ListViewHorsForfait.TabIndex = 6;
             this.ListViewHorsForfait.UseCompatibleStateImageBehavior = false;
             this.ListViewHorsForfait.View = System.Windows.Forms.View.Details;
@@ -267,6 +271,7 @@
             // 
             // panel2
             // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.DateFin);
             this.panel2.Controls.Add(this.DateDepart);
             this.panel2.Controls.Add(this.label8);
@@ -275,7 +280,7 @@
             this.panel2.Controls.Add(this.ListviewFrais);
             this.panel2.Location = new System.Drawing.Point(259, 127);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(803, 432);
+            this.panel2.Size = new System.Drawing.Size(845, 432);
             this.panel2.TabIndex = 11;
             // 
             // DateFin
@@ -334,12 +339,38 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Fiche de Frais ";
             // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader9});
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(259, 616);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(845, 292);
+            this.listView1.TabIndex = 12;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Etat";
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Date_Creation";
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Date_Fin";
+            // 
             // Visiteur
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1165, 594);
+            this.ClientSize = new System.Drawing.Size(1165, 941);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ListViewHorsForfait);
@@ -392,5 +423,9 @@
         private System.Windows.Forms.Label DateFin;
         private System.Windows.Forms.Label DateDepart;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
     }
 }
