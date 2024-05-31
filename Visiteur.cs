@@ -80,7 +80,7 @@ namespace AP1_GSB_BTS_SIO
             MySqlCommand cmd = new MySqlCommand("" +
                 "SELECT ff.valeur_total, ff.date_frais, tf.nom " +
                 "FROM `fiche_de_frais` fdf left join `frais_forfait` ff on fdf.id_fiche_frais = ff.id_fiche_frais " +
-                "left join `type_frais` tf on ff.id_type = tf.id_type " +
+                "left join `type_frais` tf on ff.id_type = tf.id_type " + 
                 "WHERE fdf.id_utilisateur = @utilisateur ;", Connection);
 
             cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
@@ -149,6 +149,11 @@ namespace AP1_GSB_BTS_SIO
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void DateDepart_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("fghj;");
         }
     }
 }

@@ -40,21 +40,21 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.ListviewFrais = new System.Windows.Forms.ListView();
-            this.ListViewHorsForfait = new System.Windows.Forms.ListView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ListViewHorsForfait = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.DateDepart = new System.Windows.Forms.Label();
             this.DateFin = new System.Windows.Forms.Label();
+            this.DateDepart = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -201,6 +201,21 @@
             this.ListviewFrais.View = System.Windows.Forms.View.Details;
             this.ListviewFrais.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Type";
+            this.columnHeader1.Width = 209;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Montant";
+            this.columnHeader2.Width = 189;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Date";
+            this.columnHeader3.Width = 208;
+            // 
             // ListViewHorsForfait
             // 
             this.ListViewHorsForfait.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -214,6 +229,21 @@
             this.ListViewHorsForfait.TabIndex = 6;
             this.ListViewHorsForfait.UseCompatibleStateImageBehavior = false;
             this.ListViewHorsForfait.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Titre";
+            this.columnHeader4.Width = 210;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Montant";
+            this.columnHeader5.Width = 186;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Date";
+            this.columnHeader6.Width = 211;
             // 
             // label3
             // 
@@ -235,36 +265,6 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Frais Hors Forfait";
             // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Type";
-            this.columnHeader1.Width = 209;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Montant";
-            this.columnHeader2.Width = 189;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Date";
-            this.columnHeader3.Width = 208;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Titre";
-            this.columnHeader4.Width = 210;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Montant";
-            this.columnHeader5.Width = 186;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Date";
-            this.columnHeader6.Width = 211;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.DateFin);
@@ -278,27 +278,28 @@
             this.panel2.Size = new System.Drawing.Size(803, 432);
             this.panel2.TabIndex = 11;
             // 
-            // label6
+            // DateFin
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.label6.Location = new System.Drawing.Point(331, 16);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(154, 27);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Fiche de Frais ";
+            this.DateFin.AutoSize = true;
+            this.DateFin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DateFin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(138)))), ((int)(((byte)(185)))));
+            this.DateFin.Location = new System.Drawing.Point(451, 46);
+            this.DateFin.Name = "DateFin";
+            this.DateFin.Size = new System.Drawing.Size(61, 15);
+            this.DateFin.TabIndex = 7;
+            this.DateFin.Text = "Date Fin";
             // 
-            // label7
+            // DateDepart
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft YaHei Light", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.label7.Location = new System.Drawing.Point(263, 44);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(28, 17);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Du ";
+            this.DateDepart.AutoSize = true;
+            this.DateDepart.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DateDepart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(138)))), ((int)(((byte)(185)))));
+            this.DateDepart.Location = new System.Drawing.Point(297, 46);
+            this.DateDepart.Name = "DateDepart";
+            this.DateDepart.Size = new System.Drawing.Size(82, 15);
+            this.DateDepart.TabIndex = 6;
+            this.DateDepart.Text = "Date depart";
+            this.DateDepart.Click += new System.EventHandler(this.DateDepart_Click);
             // 
             // label8
             // 
@@ -311,27 +312,27 @@
             this.label8.TabIndex = 2;
             this.label8.Text = "Au";
             // 
-            // DateDepart
+            // label7
             // 
-            this.DateDepart.AutoSize = true;
-            this.DateDepart.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DateDepart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(138)))), ((int)(((byte)(185)))));
-            this.DateDepart.Location = new System.Drawing.Point(297, 46);
-            this.DateDepart.Name = "DateDepart";
-            this.DateDepart.Size = new System.Drawing.Size(82, 15);
-            this.DateDepart.TabIndex = 6;
-            this.DateDepart.Text = "Date depart";
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft YaHei Light", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.label7.Location = new System.Drawing.Point(263, 44);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(28, 17);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Du ";
             // 
-            // DateFin
+            // label6
             // 
-            this.DateFin.AutoSize = true;
-            this.DateFin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DateFin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(138)))), ((int)(((byte)(185)))));
-            this.DateFin.Location = new System.Drawing.Point(451, 46);
-            this.DateFin.Name = "DateFin";
-            this.DateFin.Size = new System.Drawing.Size(61, 15);
-            this.DateFin.TabIndex = 7;
-            this.DateFin.Text = "Date Fin";
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.label6.Location = new System.Drawing.Point(331, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(154, 27);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Fiche de Frais ";
             // 
             // Visiteur
             // 
