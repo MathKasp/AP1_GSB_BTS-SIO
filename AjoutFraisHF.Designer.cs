@@ -182,6 +182,7 @@
             this.AjouterFH.TabIndex = 10;
             this.AjouterFH.Text = "Ajouter";
             this.AjouterFH.UseVisualStyleBackColor = false;
+            this.AjouterFH.Click += new System.EventHandler(this.AjouterFH_Click);
             // 
             // Fraiseffectuele
             // 

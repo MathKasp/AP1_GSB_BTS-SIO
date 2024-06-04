@@ -59,5 +59,10 @@ namespace AP1_GSB_BTS_SIO
         {
 
         }
+
+        private void AjouterFH_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Ca arrive");
+        }
     }
 }

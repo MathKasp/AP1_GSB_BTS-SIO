@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AP1_GSB_BTS_SIO
 {
@@ -18,6 +20,8 @@ namespace AP1_GSB_BTS_SIO
         {
             this.id_FicheDeFrais = id_FicheDeFrais;
             InitializeComponent();
+
+            ChoixTypeFrais.Items.Add("Salut c'est l'option 1 ca gaz");
         }
 
         // Option co et deco de la bdd
@@ -86,6 +90,18 @@ namespace AP1_GSB_BTS_SIO
         {
 
         }
+
+
+
+        // INfo pour la combo box
+
+        //SqlCommand Comande = new SqlCommand("INSERT INTO Livres (Titre, Auteur, AnneePublication, CategorieID, EditeurID) VALUES (@Titre, @Auteur, @AnneePublication, @CategorieID, @EditeurID);", cnn);
+        //Comande.Parameters.AddWithValue("@Titre", OuvreFenetre2.texttitre);
+        //Comande.Parameters.AddWithValue("@Auteur", OuvreFenetre2.textauteur);
+        //Comande.Parameters.AddWithValue("@AnneePublication", OuvreFenetre2.textannee);
+        //Comande.Parameters.AddWithValue("@CategorieID", OuvreFenetre2.textcatégorie);
+        //Comande.Parameters.AddWithValue("@EditeurID", OuvreFenetre2.textediteur);
+        //Comande.ExecuteNonQuery();
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {

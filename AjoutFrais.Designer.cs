@@ -44,7 +44,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ChoixTypeFrais = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -212,21 +212,21 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.comboBox1);
+            this.panel3.Controls.Add(this.ChoixTypeFrais);
             this.panel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel3.Location = new System.Drawing.Point(372, 138);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(314, 60);
             this.panel3.TabIndex = 9;
             // 
-            // comboBox1
+            // ChoixTypeFrais
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(49, 15);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(204, 28);
-            this.comboBox1.TabIndex = 8;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.ChoixTypeFrais.FormattingEnabled = true;
+            this.ChoixTypeFrais.Location = new System.Drawing.Point(49, 15);
+            this.ChoixTypeFrais.Name = "ChoixTypeFrais";
+            this.ChoixTypeFrais.Size = new System.Drawing.Size(204, 28);
+            this.ChoixTypeFrais.TabIndex = 8;
+            this.ChoixTypeFrais.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button2
             // 
@@ -294,7 +294,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox ChoixTypeFrais;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button3;
