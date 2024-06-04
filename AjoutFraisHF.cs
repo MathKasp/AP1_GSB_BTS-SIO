@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace AP1_GSB_BTS_SIO
 {
-    public partial class AjoutFrais : Form
+    public partial class AjoutFraisHF : Form
     {
         int id_FicheDeFrais;
-        public AjoutFrais(int id_FicheDeFrais)
+        public AjoutFraisHF(int id_FicheDeFrais)
         {
             this.id_FicheDeFrais = id_FicheDeFrais;
             InitializeComponent();
@@ -45,54 +45,19 @@ namespace AP1_GSB_BTS_SIO
         #endregion
         //
 
-        //  Outillage des composants du form //
-        #region
-        // Fermer l'appli
-        private void Fermer(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-        //
-
-        // Nouton retour
-        private void Retour(object sender, EventArgs e)
+        private void retourhf_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        //
 
-        // valider les critères saisis
-        private void Ajouter(object sender, EventArgs e)
+        private void quitterhf_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("heyyyy wont you waiiiit for me");
+            Application.Exit();
         }
-        //
 
-        // Pop up fenêtre HF même principe
-        private void Frais_HF(object sender, EventArgs e)
-        {
-            ConnectionBDD();
-
-            AjoutFraisHF OuvreDemandeFraisHF = new AjoutFraisHF(id_FicheDeFrais);
-
-            OuvreDemandeFraisHF.ShowDialog();
-
-            DeconnectionBDD();
-        }
-        //
-
-        // Contient la chaine de caractère qui va devenir le motif du Frais
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-        //
-        #endregion
-        // - //
     }
 }

@@ -48,6 +48,7 @@
             this.ClientSize = new System.Drawing.Size(1129, 653);
             this.Controls.Add(this.label1);
             this.Name = "Administrateur";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Administrateur";
             this.ResumeLayout(false);
             this.PerformLayout();

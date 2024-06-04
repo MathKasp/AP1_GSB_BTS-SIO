@@ -48,6 +48,7 @@
             this.ClientSize = new System.Drawing.Size(1150, 667);
             this.Controls.Add(this.label1);
             this.Name = "Comptable";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Comptable";
             this.ResumeLayout(false);
             this.PerformLayout();

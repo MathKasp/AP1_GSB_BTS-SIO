@@ -45,30 +45,30 @@ namespace AP1_GSB_BTS_SIO
         #endregion
         //
 
-        // Est ce que je garde ??
+        //// Est ce que je garde ??
 
-        internal class Utilisateur
-        {
-            private int ID_Utilisateur { get; set; }
-            private string nom { get; set; }
-            private string mdp { get; set; }
-            private UtilisateurRole ID_role { get; set; }
+        //internal class Utilisateur
+        //{
+        //    private int ID_Utilisateur { get; set; }
+        //    private string nom { get; set; }
+        //    private string mdp { get; set; }
+        //    private UtilisateurRole ID_role { get; set; }
 
-            public enum UtilisateurRole
-            {
-                Visiteur,
-                Comptable,
-                Administrateur
-            }
-            public Utilisateur(int ID_Utilisateur, string nom, string mdp, UtilisateurRole ID_role)
-            {
-                this.ID_Utilisateur = ID_Utilisateur;
-                this.nom = nom;
-                this.mdp = mdp;
-                this.ID_role = ID_role;
-            }
-        }
-        //
+        //    public enum UtilisateurRole
+        //    {
+        //        Visiteur,
+        //        Comptable,
+        //        Administrateur
+        //    }
+        //    public Utilisateur(int ID_Utilisateur, string nom, string mdp, UtilisateurRole ID_role)
+        //    {
+        //        this.ID_Utilisateur = ID_Utilisateur;
+        //        this.nom = nom;
+        //        this.mdp = mdp;
+        //        this.ID_role = ID_role;
+        //    }
+        //}
+        ////
 
 
         // Outillage des composants du form 
@@ -88,7 +88,9 @@ namespace AP1_GSB_BTS_SIO
         {
             ConnectionBDD();
 
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM `utilisateur` WHERE nom = '" + nom +"' AND mdp = '" +mdp+"';", Connection);
+            MySqlCommand cmd = new MySqlCommand("" +
+                "SELECT * FROM `utilisateur` " +
+                "WHERE nom = '" + nom +"' AND mdp = '" +mdp+"';", Connection);
 
             MySqlDataReader Utilisateur = cmd.ExecuteReader();
             if (Utilisateur.Read())

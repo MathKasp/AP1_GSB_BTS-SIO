@@ -116,6 +116,12 @@
     <Compile Include="AjoutFrais.Designer.cs">
       <DependentUpon>AjoutFrais.cs</DependentUpon>
     </Compile>
+    <Compile Include="AjoutFraisHF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AjoutFraisHF.Designer.cs">
+      <DependentUpon>AjoutFraisHF.cs</DependentUpon>
+    </Compile>
     <Compile Include="Log_in.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comptable.resx">
       <DependentUpon>Comptable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AjoutFraisHF.resx">
+      <DependentUpon>AjoutFraisHF.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Log_in.resx">
       <DependentUpon>Log_in.cs</DependentUpon>

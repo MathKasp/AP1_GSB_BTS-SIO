@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -85,7 +86,7 @@ namespace AP1_GSB_BTS_SIO
                 "on ff.id_type = tf.id_type WHERE fdf.id_utilisateur = @utilisateur " +
                 "AND fdf.date_creation <= DATE_FORMAT(NOW(), '%Y-%m-%d') <= fdf.date_fin;", Connection);
 
-            cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
+            cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur); // mettre un @ permet a la chaine de caractère de modifier sa valeur en l'appelant comme une variable
 
             MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
 
@@ -159,24 +160,41 @@ namespace AP1_GSB_BTS_SIO
         #endregion
         // - //
 
+        // Bouton qui affiche la pop up de toutes les fiches de cet utilisateur
         private void Historique(object sender, EventArgs e)
         {
             ConnectionBDD();
 
-
+            MessageBox.Show("Histoorique");
 
             DeconnectionBDD();
         }
+        //
 
+        // Bouton qui envoie sur l'espace Demande de Frais
         private void Demande_Frais(object sender, EventArgs e)
         {
+            ConnectionBDD();
 
-        }
+            MySqlCommand cmd = new MySqlCommand("" +
+                "SELECT fdf.id_fiche_frais " +
+                "FROM `fiche_de_frais` fdf " +
+                "WHERE fdf.id_utilisateur = @utilisateur;", Connection); // faut récupérer l'id de la fiche de frai en utilisant l'id utilisateur 
+            cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
 
-        private void Visiteur_Load(object sender, EventArgs e)
-        {
-            
+            MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
+
+            if (LecteurDonnee.Read()) 
+            {
+                int id_FicheDeFrais = LecteurDonnee.GetInt32("id_fiche_frais");
+                AjoutFrais OuvreDemandeFrais = new AjoutFrais(id_FicheDeFrais);
+
+                OuvreDemandeFrais.ShowDialog();
+            }
+
+            DeconnectionBDD();
         }
+        //
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -185,7 +203,12 @@ namespace AP1_GSB_BTS_SIO
 
         private void DateDepart_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("fghj;");
+            MessageBox.Show("hoho surprise;");
+        }
+
+        private void listView1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
