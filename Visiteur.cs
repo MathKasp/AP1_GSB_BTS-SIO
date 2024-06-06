@@ -70,7 +70,7 @@ namespace AP1_GSB_BTS_SIO
         #endregion
         //
 
-        // Bouton pour consulter la fiche ACTUELLE
+        // Bouton pour consulter la fiche ACTUELLE (+ affichage des dates de la fiche)
         #region
         private void Consulter(object sender, EventArgs e)
         {
@@ -80,10 +80,10 @@ namespace AP1_GSB_BTS_SIO
 
             // On Récupère donnee Frais Forfais 
             MySqlCommand cmd = new MySqlCommand("" +
-                "SELECT ff.valeur_total, ff.date_frais, tf.nom " +
-                "FROM `fiche_de_frais` fdf left join `frais_forfait` ff " +
-                "on fdf.id_fiche_frais = ff.id_fiche_frais left join `type_frais` tf " +
-                "on ff.id_type = tf.id_type WHERE fdf.id_utilisateur = @utilisateur " +
+                "SELECT tf.valeur, ff.date_frais, tf.nom, ff.Motif " +
+                "FROM fiche_de_frais fdf left join frais_forfait ff on fdf.id_fiche_frais = ff.id_fiche_frais " +
+                "left join type_frais tf on ff.id_type = tf.id_type " +
+                "WHERE fdf.id_utilisateur = 1 " +
                 "AND fdf.date_creation <= DATE_FORMAT(NOW(), '%Y-%m-%d') <= fdf.date_fin;", Connection);
 
             cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur); // mettre un @ permet a la chaine de caractère de modifier sa valeur en l'appelant comme une variable
@@ -95,8 +95,9 @@ namespace AP1_GSB_BTS_SIO
                 ListViewItem FraisForfait = new ListViewItem(
 
                 LecteurDonnee["nom"].ToString());
-                FraisForfait.SubItems.Add(LecteurDonnee["valeur_total"].ToString());
+                FraisForfait.SubItems.Add(LecteurDonnee["valeur"].ToString());
                 FraisForfait.SubItems.Add(LecteurDonnee["date_frais"].ToString());
+                FraisForfait.SubItems.Add(LecteurDonnee["Motif"].ToString());
 
                 ListviewFrais.Items.Add(FraisForfait);
             }
@@ -125,6 +126,8 @@ namespace AP1_GSB_BTS_SIO
                 LecteurDonnee["nom"].ToString());
                 FraisHForfait.SubItems.Add(LecteurDonnee["valeur"].ToString());
                 FraisHForfait.SubItems.Add(LecteurDonnee["date_frais"].ToString());
+                //FraisForfait.SubItems.Add(LecteurDonnee["Motif"].ToString());
+
 
                 ListViewHorsForfait.Items.Add(FraisHForfait);
             }
@@ -143,7 +146,7 @@ namespace AP1_GSB_BTS_SIO
 
             LecteurDonnee = cmd.ExecuteReader();
 
-            if (LecteurDonnee.Read())
+            while (LecteurDonnee.Read())
             {
                 string DateDeb = LecteurDonnee["date_creation"].ToString();
                 string DateFinn = LecteurDonnee["date_fin"].ToString();
@@ -165,13 +168,32 @@ namespace AP1_GSB_BTS_SIO
         {
             ConnectionBDD();
 
-            MessageBox.Show("Histoorique");
+            ListViewFichesUtiliateur.Items.Clear();
+
+            MySqlCommand cmd = new MySqlCommand("SELECT fdf.date_creation, fdf.date_fin, fdf.id_fiche_frais, e.etat FROM `fiche_de_frais` fdf LEFT JOIN `etat` e ON fdf.id_etat = e.id_etat AND fdf.id_utilisateur = @utilisateur;", Connection);
+
+            cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
+
+            MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
+
+            while (LecteurDonnee.Read())
+            {
+                ListViewItem FicheTotales = new ListViewItem(
+
+                LecteurDonnee["etat"].ToString());
+                FicheTotales.SubItems.Add(LecteurDonnee["date_creation"].ToString());
+                FicheTotales.SubItems.Add(LecteurDonnee["date_fin"].ToString());
+                FicheTotales.SubItems.Add(LecteurDonnee["id_fiche_frais"].ToString());
+
+                ListViewFichesUtiliateur.Items.Add(FicheTotales);
+            }
 
             DeconnectionBDD();
         }
         //
 
         // Bouton qui envoie sur l'espace Demande de Frais
+        #region
         private void Demande_Frais(object sender, EventArgs e)
         {
             ConnectionBDD();
@@ -194,6 +216,7 @@ namespace AP1_GSB_BTS_SIO
 
             DeconnectionBDD();
         }
+        #endregion
         //
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -206,9 +229,9 @@ namespace AP1_GSB_BTS_SIO
             MessageBox.Show("hoho surprise;");
         }
 
-        private void listView1_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void ListViewToutesLesFiches(object sender, EventArgs e)
         {
-
+            MessageBox.Show("double clicks !!");
         }
     }
 }

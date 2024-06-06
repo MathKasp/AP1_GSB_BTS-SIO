@@ -33,10 +33,9 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.TextMotifFrais = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -45,6 +44,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.ChoixTypeFrais = new System.Windows.Forms.ComboBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.DateFrais = new System.Windows.Forms.DateTimePicker();
             this.button2 = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -53,6 +54,7 @@
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -101,12 +103,6 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Ajout de frais :";
             // 
-            // monthCalendar2
-            // 
-            this.monthCalendar2.Location = new System.Drawing.Point(18, 138);
-            this.monthCalendar2.Name = "monthCalendar2";
-            this.monthCalendar2.TabIndex = 5;
-            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -117,9 +113,9 @@
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.monthCalendar2);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.panel5);
             this.panel2.Location = new System.Drawing.Point(37, 153);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(711, 591);
@@ -128,20 +124,20 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.richTextBox1);
+            this.panel4.Controls.Add(this.TextMotifFrais);
             this.panel4.Location = new System.Drawing.Point(372, 238);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(314, 153);
             this.panel4.TabIndex = 10;
             // 
-            // richTextBox1
+            // TextMotifFrais
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(6, 3);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(303, 145);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.TextMotifFrais.Location = new System.Drawing.Point(6, 3);
+            this.TextMotifFrais.Name = "TextMotifFrais";
+            this.TextMotifFrais.Size = new System.Drawing.Size(303, 145);
+            this.TextMotifFrais.TabIndex = 0;
+            this.TextMotifFrais.Text = "";
+            this.TextMotifFrais.TextChanged += new System.EventHandler(this.TextMotif);
             // 
             // label5
             // 
@@ -203,7 +199,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label2.Location = new System.Drawing.Point(100, 108);
+            this.label2.Location = new System.Drawing.Point(64, 108);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(138, 21);
             this.label2.TabIndex = 6;
@@ -226,7 +222,24 @@
             this.ChoixTypeFrais.Name = "ChoixTypeFrais";
             this.ChoixTypeFrais.Size = new System.Drawing.Size(204, 28);
             this.ChoixTypeFrais.TabIndex = 8;
-            this.ChoixTypeFrais.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.ChoixTypeFrais.SelectedIndexChanged += new System.EventHandler(this.Type_Frais);
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.DateFrais);
+            this.panel5.Location = new System.Drawing.Point(19, 132);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(332, 259);
+            this.panel5.TabIndex = 14;
+            // 
+            // DateFrais
+            // 
+            this.DateFrais.Location = new System.Drawing.Point(9, 3);
+            this.DateFrais.Name = "DateFrais";
+            this.DateFrais.Size = new System.Drawing.Size(248, 26);
+            this.DateFrais.TabIndex = 13;
+            this.DateFrais.ValueChanged += new System.EventHandler(this.SelectionDeValeurDate);
             // 
             // button2
             // 
@@ -277,6 +290,7 @@
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -286,7 +300,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.MonthCalendar monthCalendar2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
@@ -299,7 +312,9 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox TextMotifFrais;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.DateTimePicker DateFrais;
     }
 }

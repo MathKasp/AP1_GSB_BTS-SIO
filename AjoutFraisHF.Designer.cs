@@ -35,26 +35,29 @@
             this.iconhf = new System.Windows.Forms.PictureBox();
             this.ESPACEDEMANDEHF = new System.Windows.Forms.Label();
             this.panelHF = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelFH = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.MotifFH = new System.Windows.Forms.RichTextBox();
             this.Saisissezmotif = new System.Windows.Forms.Label();
             this.GSBimg3 = new System.Windows.Forms.PictureBox();
             this.AjouterFH = new System.Windows.Forms.Button();
             this.Fraiseffectuele = new System.Windows.Forms.Label();
-            this.CalendFH = new System.Windows.Forms.MonthCalendar();
             this.labelFH = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.panel1HF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconhf)).BeginInit();
             this.panelHF.SuspendLayout();
             this.panelFH.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GSBimg3)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GSBimg3)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // retourhf
@@ -119,13 +122,14 @@
             // panelHF
             // 
             this.panelHF.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelHF.Controls.Add(this.panel3);
+            this.panelHF.Controls.Add(this.label2);
             this.panelHF.Controls.Add(this.label1);
             this.panelHF.Controls.Add(this.panelFH);
             this.panelHF.Controls.Add(this.Saisissezmotif);
             this.panelHF.Controls.Add(this.GSBimg3);
             this.panelHF.Controls.Add(this.AjouterFH);
             this.panelHF.Controls.Add(this.Fraiseffectuele);
-            this.panelHF.Controls.Add(this.CalendFH);
             this.panelHF.Controls.Add(this.labelFH);
             this.panelHF.Controls.Add(this.panel2);
             this.panelHF.Location = new System.Drawing.Point(22, 155);
@@ -133,15 +137,53 @@
             this.panelHF.Size = new System.Drawing.Size(711, 593);
             this.panelHF.TabIndex = 16;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(633, 353);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(24, 25);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "€";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.label1.Location = new System.Drawing.Point(365, 314);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(267, 21);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Saisissez le coût total de ce Frais :";
+            // 
             // panelFH
             // 
             this.panelFH.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelFH.Controls.Add(this.panel1);
             this.panelFH.Controls.Add(this.MotifFH);
-            this.panelFH.Location = new System.Drawing.Point(365, 128);
+            this.panelFH.Location = new System.Drawing.Point(362, 138);
             this.panelFH.Name = "panelFH";
             this.panelFH.Size = new System.Drawing.Size(314, 169);
             this.panelFH.TabIndex = 10;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.richTextBox1);
+            this.panel1.Location = new System.Drawing.Point(-1, -1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(314, 169);
+            this.panel1.TabIndex = 11;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(303, 158);
+            this.richTextBox1.TabIndex = 14;
+            this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // MotifFH
             // 
@@ -155,7 +197,7 @@
             // 
             this.Saisissezmotif.AutoSize = true;
             this.Saisissezmotif.Font = new System.Drawing.Font("Century Gothic", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.Saisissezmotif.Location = new System.Drawing.Point(368, 104);
+            this.Saisissezmotif.Location = new System.Drawing.Point(362, 108);
             this.Saisissezmotif.Name = "Saisissezmotif";
             this.Saisissezmotif.Size = new System.Drawing.Size(230, 21);
             this.Saisissezmotif.TabIndex = 12;
@@ -188,17 +230,11 @@
             // 
             this.Fraiseffectuele.AutoSize = true;
             this.Fraiseffectuele.Font = new System.Drawing.Font("Century Gothic", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.Fraiseffectuele.Location = new System.Drawing.Point(100, 108);
+            this.Fraiseffectuele.Location = new System.Drawing.Point(43, 108);
             this.Fraiseffectuele.Name = "Fraiseffectuele";
             this.Fraiseffectuele.Size = new System.Drawing.Size(138, 21);
             this.Fraiseffectuele.TabIndex = 6;
             this.Fraiseffectuele.Text = "Frais effectué le :";
-            // 
-            // CalendFH
-            // 
-            this.CalendFH.Location = new System.Drawing.Point(18, 138);
-            this.CalendFH.Name = "CalendFH";
-            this.CalendFH.TabIndex = 5;
             // 
             // labelFH
             // 
@@ -214,50 +250,38 @@
             this.labelFH.TabIndex = 3;
             this.labelFH.Text = "Ajout de frais HORS FORFAIT :";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label1.Location = new System.Drawing.Point(368, 304);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(267, 21);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Saisissez le coût total de ce Frais :";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(303, 158);
-            this.richTextBox1.TabIndex = 14;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.richTextBox1);
-            this.panel1.Location = new System.Drawing.Point(-1, -1);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(314, 169);
-            this.panel1.TabIndex = 11;
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Location = new System.Drawing.Point(4, 3);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(314, 59);
-            this.richTextBox2.TabIndex = 0;
-            this.richTextBox2.Text = "";
-            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.richTextBox2);
-            this.panel2.Location = new System.Drawing.Point(365, 335);
+            this.panel2.Location = new System.Drawing.Point(362, 345);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(321, 65);
+            this.panel2.Size = new System.Drawing.Size(314, 44);
             this.panel2.TabIndex = 14;
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(57, 3);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(193, 33);
+            this.richTextBox2.TabIndex = 0;
+            this.richTextBox2.Text = "";
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.dateTimePicker1);
+            this.panel3.Location = new System.Drawing.Point(18, 132);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(325, 257);
+            this.panel3.TabIndex = 16;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(11, 3);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(254, 26);
+            this.dateTimePicker1.TabIndex = 0;
             // 
             // AjoutFraisHF
             // 
@@ -279,9 +303,10 @@
             this.panelHF.ResumeLayout(false);
             this.panelHF.PerformLayout();
             this.panelFH.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.GSBimg3)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.GSBimg3)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -300,12 +325,14 @@
         private System.Windows.Forms.PictureBox GSBimg3;
         private System.Windows.Forms.Button AjouterFH;
         private System.Windows.Forms.Label Fraiseffectuele;
-        private System.Windows.Forms.MonthCalendar CalendFH;
         private System.Windows.Forms.Label labelFH;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }
