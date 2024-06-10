@@ -45,32 +45,6 @@ namespace AP1_GSB_BTS_SIO
         #endregion
         //
 
-        //// Est ce que je garde ??
-
-        //internal class Utilisateur
-        //{
-        //    private int ID_Utilisateur { get; set; }
-        //    private string nom { get; set; }
-        //    private string mdp { get; set; }
-        //    private UtilisateurRole ID_role { get; set; }
-
-        //    public enum UtilisateurRole
-        //    {
-        //        Visiteur,
-        //        Comptable,
-        //        Administrateur
-        //    }
-        //    public Utilisateur(int ID_Utilisateur, string nom, string mdp, UtilisateurRole ID_role)
-        //    {
-        //        this.ID_Utilisateur = ID_Utilisateur;
-        //        this.nom = nom;
-        //        this.mdp = mdp;
-        //        this.ID_role = ID_role;
-        //    }
-        //}
-        ////
-
-
         // Outillage des composants du form 
 
         // Variables par défault de la selection de l'utilisateur
@@ -78,12 +52,8 @@ namespace AP1_GSB_BTS_SIO
         public string mdp = "";
         //
 
-        private void button_Close(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        // Validation NOM / MDP
+        // Validation NOM / MDP du log in
+        #region
         private void BoutonValider(object sender, EventArgs e)
         {
             ConnectionBDD();
@@ -124,7 +94,12 @@ namespace AP1_GSB_BTS_SIO
             }
 
             DeconnectionBDD();
+            #endregion
         }
+        //
+
+        // Outillage du form
+        #region
 
         // contient NOM
         private void TextIdentifiant(object sender, EventArgs e)
@@ -138,6 +113,13 @@ namespace AP1_GSB_BTS_SIO
             mdp = textmdpp.Text;
         }
 
+        // Bouton pour fermer l'appli
+        private void button_Close(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        #endregion
         //
     }
 }

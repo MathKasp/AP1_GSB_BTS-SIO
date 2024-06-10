@@ -49,30 +49,9 @@ namespace AP1_GSB_BTS_SIO
         #endregion
         //
 
-
-        // Outillage des composants du form //
-
-        // Bouton simples
+        // Fonction Actualiser (actualise la fiche de frais actuel)
         #region
-        // Fermer tout
-        private void BoutonFermer(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-        //
-
-        // Retour au log in
-        private void boutonRetour(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        // 
-        #endregion
-        //
-
-        // Bouton pour consulter la fiche ACTUELLE (+ affichage des dates de la fiche)
-        #region
-        private void Consulter(object sender, EventArgs e)
+        public void Actualiser()
         {
             ConnectionBDD();
 
@@ -105,7 +84,7 @@ namespace AP1_GSB_BTS_SIO
             LecteurDonnee.Close();
             //
 
-            ListViewHorsForfait.Items.Clear ();
+            ListViewHorsForfait.Items.Clear();
 
             // On récupère les donnee Frais Hors Forfait
             cmd = new MySqlCommand("" +
@@ -134,17 +113,50 @@ namespace AP1_GSB_BTS_SIO
 
             LecteurDonnee.Close();
 
+            DeconnectionBDD();
             //
+        }
+        #endregion
+        //
+
+
+        // Outillage des composants du form //
+
+        // Bouton simples
+        #region
+        // Fermer tout
+        private void BoutonFermer(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        //
+
+        // Retour au log in
+        private void boutonRetour(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        // 
+        #endregion
+        //
+
+        // Bouton pour consulter la fiche ACTUELLE (+ affichage des dates de la fiche)
+        #region
+        private void Consulter(object sender, EventArgs e)
+        {
+            Actualiser();
+
+            ConnectionBDD();
 
             // Affichage de la date debut / Fin de la fiche observé
-            cmd = new MySqlCommand("" +
+            MySqlCommand cmd = new MySqlCommand("" +
             "SELECT fdf.date_creation, fdf.date_fin " +
             "FROM `fiche_de_frais` fdf WHERE date_creation <= DATE_FORMAT(NOW(), '%Y-%m-%d') <= date_fin " +
             "AND fdf.id_utilisateur = @utilisateur;", Connection);
 
             cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
 
-            LecteurDonnee = cmd.ExecuteReader();
+            MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
 
             while (LecteurDonnee.Read())
             {
@@ -164,6 +176,7 @@ namespace AP1_GSB_BTS_SIO
         // - //
 
         // Bouton qui affiche la pop up de toutes les fiches de cet utilisateur
+        #region
         private void Historique(object sender, EventArgs e)
         {
             ConnectionBDD();
@@ -190,6 +203,7 @@ namespace AP1_GSB_BTS_SIO
 
             DeconnectionBDD();
         }
+        #endregion
         //
 
         // Bouton qui envoie sur l'espace Demande de Frais
@@ -215,6 +229,8 @@ namespace AP1_GSB_BTS_SIO
             }
 
             DeconnectionBDD();
+
+            Actualiser();
         }
         #endregion
         //

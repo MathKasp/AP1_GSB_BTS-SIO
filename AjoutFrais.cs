@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
+using Mysqlx.Notice;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +22,7 @@ namespace AP1_GSB_BTS_SIO
 
 
         // Variables par défauts
-
+        #region
 
         int id_FicheDeFrais;
 
@@ -31,7 +32,8 @@ namespace AP1_GSB_BTS_SIO
         string type_f = ""; // sert a récup id_type
         string type_id = ""; // id_type va ici 
 
-        string Datefrais = "tout ca c'est de ma faute";
+        string Datefrais = "";
+        #endregion
         //
 
 
@@ -82,8 +84,8 @@ namespace AP1_GSB_BTS_SIO
         #endregion
         //
 
+
         //  Outillage des composants du form //
-        #region
 
 
         // Fermer l'appli/ retour
@@ -109,7 +111,7 @@ namespace AP1_GSB_BTS_SIO
             {
                 if (type_f == "" || motif_frais == "" || Datefrais == "")
                 {
-                    MessageBox.Show("Certaines valeurs essentiels sont manquantes, assurez vous d'avoir rempli correctement tout les chants.");
+                    MessageBox.Show("Certaines valeurs sont invalides, assurez vous d'avoir rempli correctement tout les chants.");
                 }
                 else
                 {
@@ -121,6 +123,8 @@ namespace AP1_GSB_BTS_SIO
                     cmd.Parameters.AddWithValue("@motif_frais", motif_frais);
 
                     cmd.ExecuteNonQuery();
+
+                    this.Close();
                 }
             }
             catch (Exception msg)
@@ -133,7 +137,8 @@ namespace AP1_GSB_BTS_SIO
         #endregion
         //
 
-        // redirection vers fenêtre frais HF (même principe)
+        // redirection vers fenêtre frais HF
+        #region
         private void Frais_HF(object sender, EventArgs e)
         {
             ConnectionBDD();
@@ -143,13 +148,18 @@ namespace AP1_GSB_BTS_SIO
             OuvreDemandeFraisHF.ShowDialog();
 
             DeconnectionBDD();
+
+            this.Close();
         }
+        #endregion
         //
 
         // 3 valeurs entrées par le visiteur pour son ajout ( motif_frais, type_f, Datefrais )
         #region
+
+
         // Contient la chaine de caractère qui va devenir le motif du Frais 
-        private void TextMotif(object sender, EventArgs e)
+        private void TextMotif (object sender, EventArgs e)
         {
             motif_frais = TextMotifFrais.Text;
         }
@@ -162,19 +172,37 @@ namespace AP1_GSB_BTS_SIO
 
             type_f = ChoixTypeFrais.Text;
 
-            // requete pour récupérer la valeur qui va avec le type de frais
-            MySqlCommand cmd = new MySqlCommand("" +
-                "SELECT tf.id_type FROM `type_frais`tf " +
-                "LEFT JOIN `frais_forfait` ff ON ff.id_type = tf.id_type " +
-                "WHERE ff.id_fiche_frais = @id_FicheFrais AND tf.nom = @type_f;", Connection);
+            MySqlCommand cmd = new MySqlCommand("SELECT tf.id_type FROM `type_frais` tf WHERE tf.nom = @type_f; ", Connection);
 
-            cmd.Parameters.AddWithValue("@id_FicheFrais", id_FicheDeFrais);
             cmd.Parameters.AddWithValue("@type_f", type_f);
 
             MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
 
             if (LecteurDonnee.Read())
             {
+                if (type_f == "frais kilometrique")
+                {
+                    MessageBox.Show("Work in progress");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                }
+
                 type_id = LecteurDonnee["id_type"].ToString();
             }
 
@@ -208,7 +236,6 @@ namespace AP1_GSB_BTS_SIO
                 if (date_creation <= DateChoisi && DateChoisi <= date_fin)
                 {
                     Datefrais = DateChoisi.ToString("yyyy-MM-dd");
-                    MessageBox.Show(Datefrais);
                 }
                 else
                 {
@@ -224,7 +251,6 @@ namespace AP1_GSB_BTS_SIO
         //
 
 
-        #endregion
         // - //
     }
 }

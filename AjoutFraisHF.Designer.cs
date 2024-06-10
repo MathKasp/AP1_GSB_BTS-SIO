@@ -35,11 +35,13 @@
             this.iconhf = new System.Windows.Forms.PictureBox();
             this.ESPACEDEMANDEHF = new System.Windows.Forms.Label();
             this.panelHF = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.DateDuFrais = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelFH = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.TextMotifFrais = new System.Windows.Forms.RichTextBox();
             this.MotifFH = new System.Windows.Forms.RichTextBox();
             this.Saisissezmotif = new System.Windows.Forms.Label();
             this.GSBimg3 = new System.Windows.Forms.PictureBox();
@@ -47,17 +49,15 @@
             this.Fraiseffectuele = new System.Windows.Forms.Label();
             this.labelFH = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.ValeurDuFrais = new System.Windows.Forms.RichTextBox();
             this.panel1HF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconhf)).BeginInit();
             this.panelHF.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panelFH.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GSBimg3)).BeginInit();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // retourhf
@@ -137,6 +137,23 @@
             this.panelHF.Size = new System.Drawing.Size(711, 593);
             this.panelHF.TabIndex = 16;
             // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.DateDuFrais);
+            this.panel3.Location = new System.Drawing.Point(18, 132);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(325, 257);
+            this.panel3.TabIndex = 16;
+            // 
+            // DateDuFrais
+            // 
+            this.DateDuFrais.Location = new System.Drawing.Point(11, 3);
+            this.DateDuFrais.Name = "DateDuFrais";
+            this.DateDuFrais.Size = new System.Drawing.Size(254, 26);
+            this.DateDuFrais.TabIndex = 0;
+            this.DateDuFrais.ValueChanged += new System.EventHandler(this.SelectionDeValeurDate);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -170,20 +187,20 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.richTextBox1);
+            this.panel1.Controls.Add(this.TextMotifFrais);
             this.panel1.Location = new System.Drawing.Point(-1, -1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(314, 169);
             this.panel1.TabIndex = 11;
             // 
-            // richTextBox1
+            // TextMotifFrais
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(303, 158);
-            this.richTextBox1.TabIndex = 14;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.TextMotifFrais.Location = new System.Drawing.Point(3, 3);
+            this.TextMotifFrais.Name = "TextMotifFrais";
+            this.TextMotifFrais.Size = new System.Drawing.Size(303, 158);
+            this.TextMotifFrais.TabIndex = 14;
+            this.TextMotifFrais.Text = "";
+            this.TextMotifFrais.TextChanged += new System.EventHandler(this.TextMotif);
             // 
             // MotifFH
             // 
@@ -224,7 +241,7 @@
             this.AjouterFH.TabIndex = 10;
             this.AjouterFH.Text = "Ajouter";
             this.AjouterFH.UseVisualStyleBackColor = false;
-            this.AjouterFH.Click += new System.EventHandler(this.AjouterFH_Click);
+            this.AjouterFH.Click += new System.EventHandler(this.AjouterFHF);
             // 
             // Fraiseffectuele
             // 
@@ -253,42 +270,27 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.richTextBox2);
+            this.panel2.Controls.Add(this.ValeurDuFrais);
             this.panel2.Location = new System.Drawing.Point(362, 345);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(314, 44);
             this.panel2.TabIndex = 14;
             // 
-            // richTextBox2
+            // ValeurDuFrais
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(57, 3);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(193, 33);
-            this.richTextBox2.TabIndex = 0;
-            this.richTextBox2.Text = "";
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.dateTimePicker1);
-            this.panel3.Location = new System.Drawing.Point(18, 132);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(325, 257);
-            this.panel3.TabIndex = 16;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(11, 3);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(254, 26);
-            this.dateTimePicker1.TabIndex = 0;
+            this.ValeurDuFrais.Location = new System.Drawing.Point(57, 3);
+            this.ValeurDuFrais.Name = "ValeurDuFrais";
+            this.ValeurDuFrais.Size = new System.Drawing.Size(193, 33);
+            this.ValeurDuFrais.TabIndex = 0;
+            this.ValeurDuFrais.Text = "";
+            this.ValeurDuFrais.TextChanged += new System.EventHandler(this.Valeurfrais);
             // 
             // AjoutFraisHF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(763, 772);
+            this.ClientSize = new System.Drawing.Size(754, 768);
             this.Controls.Add(this.retourhf);
             this.Controls.Add(this.quitterhf);
             this.Controls.Add(this.panel1HF);
@@ -302,11 +304,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconhf)).EndInit();
             this.panelHF.ResumeLayout(false);
             this.panelHF.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.panelFH.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GSBimg3)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -326,13 +328,13 @@
         private System.Windows.Forms.Button AjouterFH;
         private System.Windows.Forms.Label Fraiseffectuele;
         private System.Windows.Forms.Label labelFH;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox TextMotifFrais;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox ValeurDuFrais;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker DateDuFrais;
     }
 }
