@@ -43,6 +43,7 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ListViewHorsForfait = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -61,11 +62,9 @@
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel3 = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ListeIdFiches = new System.Windows.Forms.ComboBox();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.button5 = new System.Windows.Forms.Button();
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -229,13 +228,17 @@
             this.columnHeader3.Text = "Date";
             this.columnHeader3.Width = 180;
             // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Motif";
+            this.columnHeader11.Width = 400;
+            // 
             // ListViewHorsForfait
             // 
             this.ListViewHorsForfait.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4,
             this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader12});
+            this.columnHeader6});
             this.ListViewHorsForfait.HideSelection = false;
             this.ListViewHorsForfait.Location = new System.Drawing.Point(28, 323);
             this.ListViewHorsForfait.Name = "ListViewHorsForfait";
@@ -247,7 +250,7 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Titre";
-            this.columnHeader4.Width = 165;
+            this.columnHeader4.Width = 190;
             // 
             // columnHeader5
             // 
@@ -314,7 +317,7 @@
             this.DateDepart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(138)))), ((int)(((byte)(185)))));
             this.DateDepart.Location = new System.Drawing.Point(311, 27);
             this.DateDepart.Name = "DateDepart";
-            this.DateDepart.Size = new System.Drawing.Size(173, 33);
+            this.DateDepart.Size = new System.Drawing.Size(115, 22);
             this.DateDepart.TabIndex = 6;
             this.DateDepart.Text = "Date depart";
             this.DateDepart.Click += new System.EventHandler(this.DateDepart_Click);
@@ -337,7 +340,7 @@
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.label7.Location = new System.Drawing.Point(277, 27);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(54, 32);
+            this.label7.Size = new System.Drawing.Size(36, 21);
             this.label7.TabIndex = 1;
             this.label7.Text = "Du ";
             // 
@@ -391,20 +394,21 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.comboBox1);
+            this.panel3.Controls.Add(this.ListeIdFiches);
             this.panel3.Controls.Add(this.ListViewFichesUtiliateur);
             this.panel3.Location = new System.Drawing.Point(259, 713);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(946, 362);
             this.panel3.TabIndex = 13;
             // 
-            // comboBox1
+            // ListeIdFiches
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(867, 14);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(66, 28);
-            this.comboBox1.TabIndex = 14;
+            this.ListeIdFiches.FormattingEnabled = true;
+            this.ListeIdFiches.Location = new System.Drawing.Point(867, 14);
+            this.ListeIdFiches.Name = "ListeIdFiches";
+            this.ListeIdFiches.Size = new System.Drawing.Size(66, 28);
+            this.ListeIdFiches.TabIndex = 14;
+            this.ListeIdFiches.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button5
             // 
@@ -418,17 +422,6 @@
             this.button5.TabIndex = 14;
             this.button5.Text = "Afficher la selection";
             this.button5.UseVisualStyleBackColor = true;
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "Motif";
-            this.columnHeader11.Width = 400;
-            // 
-            // columnHeader12
-            // 
-            this.columnHeader12.Text = "Motif";
-            this.columnHeader12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader12.Width = 400;
             // 
             // Visiteur
             // 
@@ -492,10 +485,9 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ColumnHeader columnHeader10;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox ListeIdFiches;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ColumnHeader columnHeader11;
-        private System.Windows.Forms.ColumnHeader columnHeader12;
     }
 }

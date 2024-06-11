@@ -122,6 +122,12 @@
     <Compile Include="AjoutFraisHF.Designer.cs">
       <DependentUpon>AjoutFraisHF.cs</DependentUpon>
     </Compile>
+    <Compile Include="KiloUtilFrais.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KiloUtilFrais.Designer.cs">
+      <DependentUpon>KiloUtilFrais.cs</DependentUpon>
+    </Compile>
     <Compile Include="Log_in.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AjoutFraisHF.resx">
       <DependentUpon>AjoutFraisHF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KiloUtilFrais.resx">
+      <DependentUpon>KiloUtilFrais.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Log_in.resx">
       <DependentUpon>Log_in.cs</DependentUpon>

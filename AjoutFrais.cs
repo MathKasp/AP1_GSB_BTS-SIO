@@ -33,6 +33,9 @@ namespace AP1_GSB_BTS_SIO
         string type_id = ""; // id_type va ici 
 
         string Datefrais = "";
+
+        double Valeur = 0;
+        string valeurchar;
         #endregion
         //
 
@@ -42,7 +45,7 @@ namespace AP1_GSB_BTS_SIO
             this.id_FicheDeFrais = id_FicheDeFrais;
             InitializeComponent();
 
-            // remplissage du combobox sur frais 
+            // remplissage du combobox sur frais
             #region
             ConnectionBDD();
 
@@ -85,7 +88,7 @@ namespace AP1_GSB_BTS_SIO
         //
 
 
-        //  Outillage des composants du form //
+        // - Outillage des composants du form - //
 
 
         // Fermer l'appli/ retour
@@ -105,22 +108,60 @@ namespace AP1_GSB_BTS_SIO
         #region
         private void Ajouter(object sender, EventArgs e)
         {
+            // On attribu la valeur au ff celon la valeur celon le type de frais effectué
+            #region
+
+            ConnectionBDD();
+
+            MySqlCommand cmd = new MySqlCommand ("SELECT valeur FROM `type_frais` WHERE id_type = @type_id;", Connection);
+
+            cmd.Parameters.AddWithValue("@type_id", type_id);
+
+            MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
+
+            if (LecteurDonnee.Read())
+            {
+                valeurchar = LecteurDonnee["valeur"].ToString();
+                Valeur = Convert.ToDouble(valeurchar);
+            }
+
+            // Gestion exeptionnel si frais kilometrique est choisi
+            #region
+
+            if (type_f == "frais kilometrique")
+            {
+                KiloUtilFrais OuvreKiloUtil = new KiloUtilFrais();
+
+                OuvreKiloUtil.ShowDialog();
+
+                Valeur = OuvreKiloUtil.ValeurK * Convert.ToDouble(valeurchar);
+            }
+            #endregion
+            //
+
+            DeconnectionBDD();
+
+            #endregion
+            //
+
             ConnectionBDD();
 
             try
             {
-                if (type_f == "" || motif_frais == "" || Datefrais == "")
+                if (type_f == "" || motif_frais == "" || Datefrais == "" || Valeur == 0)
                 {
                     MessageBox.Show("Certaines valeurs sont invalides, assurez vous d'avoir rempli correctement tout les chants.");
                 }
                 else
+                ////
                 {
-                    MySqlCommand cmd = new MySqlCommand("INSERT INTO `frais_forfait` (date_frais, id_fiche_frais, id_type, Motif) VALUES (@Datefrais, @id_FicheDeFrais, @type_id, @motif_frais);", Connection);
+                    cmd = new MySqlCommand("INSERT INTO `frais_forfait` (date_frais, id_fiche_frais, id_type, Motif, Valeur) VALUES (@Datefrais, @id_FicheDeFrais, @type_id, @motif_frais, @Valeur);", Connection);
 
                     cmd.Parameters.AddWithValue("@Datefrais", Datefrais);
                     cmd.Parameters.AddWithValue("@id_FicheDeFrais", id_FicheDeFrais);
                     cmd.Parameters.AddWithValue("@type_id", type_id);
                     cmd.Parameters.AddWithValue("@motif_frais", motif_frais);
+                    cmd.Parameters.AddWithValue("@Valeur", Valeur);
 
                     cmd.ExecuteNonQuery();
 
@@ -180,29 +221,6 @@ namespace AP1_GSB_BTS_SIO
 
             if (LecteurDonnee.Read())
             {
-                if (type_f == "frais kilometrique")
-                {
-                    MessageBox.Show("Work in progress");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }
-
                 type_id = LecteurDonnee["id_type"].ToString();
             }
 

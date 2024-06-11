@@ -21,6 +21,18 @@ namespace AP1_GSB_BTS_SIO
         {
             this.idUtilisateur = idUtilisateur;
             InitializeComponent();
+
+            ConnectionBDD();
+
+            MySqlCommand cmd = new MySqlCommand("SELECT fdf.id_fiche_frais FROM `fiche_de_frais` fdf ;", Connection);
+
+            MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
+
+            while (LecteurDonnee.Read())
+            {
+                ListeIdFiches.Items.Add(LecteurDonnee["id_fiche_frais"].ToString());
+            }
+            DeconnectionBDD();
         }
 
 
@@ -59,13 +71,13 @@ namespace AP1_GSB_BTS_SIO
 
             // On Récupère donnee Frais Forfais 
             MySqlCommand cmd = new MySqlCommand("" +
-                "SELECT tf.valeur, ff.date_frais, tf.nom, ff.Motif " +
+                "SELECT ff.Valeur, ff.date_frais, tf.nom, ff.Motif " +
                 "FROM fiche_de_frais fdf left join frais_forfait ff on fdf.id_fiche_frais = ff.id_fiche_frais " +
                 "left join type_frais tf on ff.id_type = tf.id_type " +
                 "WHERE fdf.id_utilisateur = 1 " +
                 "AND fdf.date_creation <= DATE_FORMAT(NOW(), '%Y-%m-%d') <= fdf.date_fin;", Connection);
 
-            cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur); // mettre un @ permet a la chaine de caractère de modifier sa valeur en l'appelant comme une variable
+            cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
 
             MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
 
@@ -120,7 +132,8 @@ namespace AP1_GSB_BTS_SIO
         //
 
 
-        // Outillage des composants du form //
+        // - Outillage des composants du form - //
+
 
         // Bouton simples
         #region
@@ -173,9 +186,9 @@ namespace AP1_GSB_BTS_SIO
             DeconnectionBDD();  
         }
         #endregion
-        // - //
+        //
 
-        // Bouton qui affiche la pop up de toutes les fiches de cet utilisateur
+        // Bouton qui affiche toutes les fiches de cet utilisateur
         #region
         private void Historique(object sender, EventArgs e)
         {
@@ -248,6 +261,11 @@ namespace AP1_GSB_BTS_SIO
         private void ListViewToutesLesFiches(object sender, EventArgs e)
         {
             MessageBox.Show("double clicks !!");
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
