@@ -16,6 +16,7 @@ namespace AP1_GSB_BTS_SIO
 
         // Variables par défaut
         #region
+        DateTime dateActuel = DateTime.Now;
         int id_FicheDeFrais;
 
         // vars pour ajouter
@@ -138,13 +139,14 @@ namespace AP1_GSB_BTS_SIO
         {
             ConnectionBDD();
 
+            // Date actuel en yyyy MM dd
+
             DateTime DateChoisi = DateDuFrais.Value;
 
             MySqlCommand cmd = new MySqlCommand("" +
             "SELECT fdf.date_creation, fdf.date_fin " +
             "FROM `fiche_de_frais` fdf " +
-            "WHERE fdf.id_fiche_frais = @id_FicheFrais " +
-            "AND fdf.date_creation <= DATE_FORMAT(NOW(), '%Y-%m-%d')<= fdf.date_fin;", Connection);
+            "WHERE fdf.id_fiche_frais = @id_FicheFrais ", Connection);
 
             cmd.Parameters.AddWithValue("@id_FicheFrais", id_FicheDeFrais);
 
@@ -162,7 +164,7 @@ namespace AP1_GSB_BTS_SIO
                 }
                 else
                 {
-                    MessageBox.Show("Veuillez selectionner une date comprise entre la date de début et la date de fin d'effet de la fiche de frais actuelle.");
+                    MessageBox.Show("Veuillez selectionner une date comprise entre la date de début et la date de fin d'effet de la fiche de frais actuelle." + date_creation + " - " + date_fin + id_FicheDeFrais);
                     datefrais = "";
                 }
             }

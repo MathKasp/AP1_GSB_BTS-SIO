@@ -64,7 +64,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.ListeIdFiches = new System.Windows.Forms.ComboBox();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
-            this.button5 = new System.Windows.Forms.Button();
+            this.Afficherselection = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -211,7 +211,6 @@
             this.ListviewFrais.TabIndex = 5;
             this.ListviewFrais.UseCompatibleStateImageBehavior = false;
             this.ListviewFrais.View = System.Windows.Forms.View.Details;
-            this.ListviewFrais.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -320,7 +319,6 @@
             this.DateDepart.Size = new System.Drawing.Size(115, 22);
             this.DateDepart.TabIndex = 6;
             this.DateDepart.Text = "Date depart";
-            this.DateDepart.Click += new System.EventHandler(this.DateDepart_Click);
             // 
             // label8
             // 
@@ -369,7 +367,6 @@
             this.ListViewFichesUtiliateur.TabIndex = 12;
             this.ListViewFichesUtiliateur.UseCompatibleStateImageBehavior = false;
             this.ListViewFichesUtiliateur.View = System.Windows.Forms.View.Details;
-            this.ListViewFichesUtiliateur.SelectedIndexChanged += new System.EventHandler(this.ListViewToutesLesFiches);
             // 
             // columnHeader9
             // 
@@ -408,20 +405,21 @@
             this.ListeIdFiches.Name = "ListeIdFiches";
             this.ListeIdFiches.Size = new System.Drawing.Size(66, 28);
             this.ListeIdFiches.TabIndex = 14;
-            this.ListeIdFiches.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.ListeIdFiches.SelectedIndexChanged += new System.EventHandler(this.ListeIdFichesComboBox);
             // 
-            // button5
+            // Afficherselection
             // 
-            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.button5.Location = new System.Drawing.Point(1234, 824);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(201, 124);
-            this.button5.TabIndex = 14;
-            this.button5.Text = "Afficher la selection";
-            this.button5.UseVisualStyleBackColor = true;
+            this.Afficherselection.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Afficherselection.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.Afficherselection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Afficherselection.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.Afficherselection.Location = new System.Drawing.Point(1237, 742);
+            this.Afficherselection.Name = "Afficherselection";
+            this.Afficherselection.Size = new System.Drawing.Size(201, 124);
+            this.Afficherselection.TabIndex = 14;
+            this.Afficherselection.Text = "Afficher la selection";
+            this.Afficherselection.UseVisualStyleBackColor = true;
+            this.Afficherselection.Click += new System.EventHandler(this.AfficherFicheparID);
             // 
             // Visiteur
             // 
@@ -429,7 +427,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1475, 1080);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.Afficherselection);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
@@ -487,7 +485,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ComboBox ListeIdFiches;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button Afficherselection;
         private System.Windows.Forms.ColumnHeader columnHeader11;
     }
 }

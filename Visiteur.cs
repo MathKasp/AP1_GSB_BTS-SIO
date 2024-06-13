@@ -16,23 +16,21 @@ namespace AP1_GSB_BTS_SIO
 {
     public partial class Visiteur : Form
     {
+
+        // Vars par défaut
+
         private int idUtilisateur;
+
+        DateTime dateActuel = DateTime.Now;
+
+        string IDselection = "";
+        //
+
         public Visiteur(int idUtilisateur)
         {
             this.idUtilisateur = idUtilisateur;
             InitializeComponent();
 
-            ConnectionBDD();
-
-            MySqlCommand cmd = new MySqlCommand("SELECT fdf.id_fiche_frais FROM `fiche_de_frais` fdf ;", Connection);
-
-            MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
-
-            while (LecteurDonnee.Read())
-            {
-                ListeIdFiches.Items.Add(LecteurDonnee["id_fiche_frais"].ToString());
-            }
-            DeconnectionBDD();
         }
 
 
@@ -61,32 +59,80 @@ namespace AP1_GSB_BTS_SIO
         #endregion
         //
 
-        // Fonction Actualiser (actualise la fiche de frais actuel)
+        // Fonction Actualiser (actualise la fiche de frais actuel quand bouton 'Afficher' ou 'Faire une demande' est activé )
         #region
         public void Actualiser()
         {
             ConnectionBDD();
 
+
+            // Cas de test et de creation automatique de la fiche si necessaire
+            #region
+
             ListviewFrais.Items.Clear();
 
-            // On Récupère donnee Frais Forfais 
-            MySqlCommand cmd = new MySqlCommand("" +
-                "SELECT ff.Valeur, ff.date_frais, tf.nom, ff.Motif " +
-                "FROM fiche_de_frais fdf left join frais_forfait ff on fdf.id_fiche_frais = ff.id_fiche_frais " +
-                "left join type_frais tf on ff.id_type = tf.id_type " +
-                "WHERE fdf.id_utilisateur = 1 " +
-                "AND fdf.date_creation <= DATE_FORMAT(NOW(), '%Y-%m-%d') <= fdf.date_fin;", Connection);
-
-            cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
+            // On test la date de fin de la fiche actuel (si on trouve pas de fiche a jour var = false sinon var = true
+            MySqlCommand cmd = new MySqlCommand ("SELECT date_fin FROM `fiche_de_frais`;", Connection);
 
             MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
+
+            bool FicheAJourExiste = false;
+            while (LecteurDonnee.Read())
+            {
+                DateTime datefin = DateTime.Parse(LecteurDonnee["date_fin"].ToString()); // A chaque date trouvée on en fait une valeur DateTime a comparer avec la valeur de la date actuelle
+                if (datefin > dateActuel)
+                {
+                    FicheAJourExiste = true;
+                }
+            }
+            //
+
+            if (FicheAJourExiste == false)
+            {
+                cmd = new MySqlCommand("UPDATE `fiche_de_frais`fdf SET id_etat = 1 WHERE fdf.id_etat = 2;");
+
+                cmd.ExecuteNonQuery();
+
+                DeconnectionBDD();
+
+                CreationFiche(); // co => deco en interne
+
+            }
+
+            DeconnectionBDD();
+
+            #endregion
+            //
+
+            // Remplissage des deux espace Frais forfait et Frais Hors forfais
+            #region
+
+            // On Récupère donnee Frais Forfais
+
+            ConnectionBDD();
+
+            string DateActustring = dateActuel.ToString("yyyy-MM-dd"); // Préciser format
+
+            cmd = new MySqlCommand("" +
+                "SELECT ff.Valeur, ff.date_frais, tf.nom, ff.Motif " +
+                "FROM `fiche_de_frais` fdf " +
+                "left join `frais_forfait` ff on fdf.id_fiche_frais = ff.id_fiche_frais " +
+                "left join `type_frais` tf on ff.id_type = tf.id_type " +
+                "WHERE fdf.id_utilisateur = @utilisateur " +
+                "AND fdf.date_creation <= @dateNow " +
+                "AND @dateNow <= fdf.date_fin;", Connection);
+
+            cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
+            cmd.Parameters.AddWithValue("@dateNow", DateActustring);
+
+            LecteurDonnee = cmd.ExecuteReader();
 
             while (LecteurDonnee.Read())
             {
                 ListViewItem FraisForfait = new ListViewItem(
 
                 LecteurDonnee["nom"].ToString());
-                FraisForfait.SubItems.Add(LecteurDonnee["valeur"].ToString());
+                FraisForfait.SubItems.Add(LecteurDonnee["Valeur"].ToString());
                 FraisForfait.SubItems.Add(LecteurDonnee["date_frais"].ToString());
                 FraisForfait.SubItems.Add(LecteurDonnee["Motif"].ToString());
 
@@ -101,32 +147,99 @@ namespace AP1_GSB_BTS_SIO
             // On récupère les donnee Frais Hors Forfait
             cmd = new MySqlCommand("" +
             "SELECT fhf.nom, fhf.valeur, fhf.date_frais " +
-            "FROM `fiche_de_frais` fdf left join `frais_hors_forfait` fhf " +
-            "on fhf.id_fiche_frais = fdf.id_fiche_frais " +
+            "FROM `fiche_de_frais` fdf " +
+            "left join `frais_hors_forfait` fhf on fhf.id_fiche_frais = fdf.id_fiche_frais " +
             "WHERE fdf.id_utilisateur = @utilisateur " +
-            "AND fdf.date_creation <= DATE_FORMAT(NOW(), '%Y-%m-%d') <= fdf.date_fin;", Connection);
+            "AND fdf.date_creation <= @dateNow " +
+            "AND @dateNow <= fdf.date_fin;", Connection);
 
             cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
+            cmd.Parameters.AddWithValue("@dateNow", DateActustring);
+
+            try
+            {
+                LecteurDonnee = cmd.ExecuteReader();
+
+                while (LecteurDonnee.Read())
+                {
+                    ListViewItem FraisHForfait = new ListViewItem(
+
+                    LecteurDonnee["nom"].ToString());
+                    FraisHForfait.SubItems.Add(LecteurDonnee["valeur"].ToString());
+                    FraisHForfait.SubItems.Add(LecteurDonnee["date_frais"].ToString());
+
+                    ListViewHorsForfait.Items.Add(FraisHForfait);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Aucun éléments");
+            }
+
+            LecteurDonnee.Close();
+
+            #endregion
+            //
+
+            //  pour remplir le combox box pour la selection précise de fiche par ID
+            #region
+
+            ListeIdFiches.Items.Clear();
+
+            cmd = new MySqlCommand("SELECT fdf.id_fiche_frais FROM `fiche_de_frais` fdf ;", Connection);
 
             LecteurDonnee = cmd.ExecuteReader();
 
             while (LecteurDonnee.Read())
             {
-                ListViewItem FraisHForfait = new ListViewItem(
-
-                LecteurDonnee["nom"].ToString());
-                FraisHForfait.SubItems.Add(LecteurDonnee["valeur"].ToString());
-                FraisHForfait.SubItems.Add(LecteurDonnee["date_frais"].ToString());
-                //FraisForfait.SubItems.Add(LecteurDonnee["Motif"].ToString());
-
-
-                ListViewHorsForfait.Items.Add(FraisHForfait);
+                ListeIdFiches.Items.Add(LecteurDonnee["id_fiche_frais"].ToString());
             }
 
-            LecteurDonnee.Close();
+            #endregion
+            //
 
             DeconnectionBDD();
+        }
+        #endregion
+        //
+
+        // Fonction Création automatique si plus aucune fiche a jour
+        #region
+        public void CreationFiche()
+        {
+            ConnectionBDD();
+
+            // Variables necessaire pour la requète de crétion
+            int jourcreation = 11;
+            int jourfin = 10;
+
+            int moiscreation = DateTime.Now.Month;
+            int moisfin = moiscreation + 1;
+
+            int anneecreation = DateTime.Now.Year;
+            int anneefin = anneecreation;
+
+            if (moiscreation == 12) // si mois debut est Decembre => mois fin sera Janvier et annee augmente de 1
+            {
+                moisfin = 1;
+                anneefin = anneecreation + 1;
+            }
+
+            string datecreation = anneecreation.ToString() + "-" + moiscreation.ToString() + "-" + jourcreation.ToString();
+            string datefin = anneefin.ToString() + "-" + moisfin.ToString() + "-" + jourfin.ToString();
             //
+
+            MySqlCommand cmd = new MySqlCommand ("" +
+                "INSERT INTO `fiche_de_frais` (date_creation, date_fin, id_etat, id_utilisateur) " +
+                "VALUES (@datecreation, @datefin, 2, @utilisateur);", Connection);
+
+            cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
+            cmd.Parameters.AddWithValue("@datecreation", datecreation);
+            cmd.Parameters.AddWithValue("@datefin", datefin);
+
+            cmd.ExecuteNonQuery();
+
+            DeconnectionBDD();
         }
         #endregion
         //
@@ -135,7 +248,7 @@ namespace AP1_GSB_BTS_SIO
         // - Outillage des composants du form - //
 
 
-        // Bouton simples
+        // Boutons simples
         #region
         // Fermer tout
         private void BoutonFermer(object sender, EventArgs e)
@@ -223,13 +336,21 @@ namespace AP1_GSB_BTS_SIO
         #region
         private void Demande_Frais(object sender, EventArgs e)
         {
+            Actualiser();
+
             ConnectionBDD();
+
+            string DateActustring = dateActuel.ToString("yyyy-MM-dd"); // Préciser format
 
             MySqlCommand cmd = new MySqlCommand("" +
                 "SELECT fdf.id_fiche_frais " +
                 "FROM `fiche_de_frais` fdf " +
-                "WHERE fdf.id_utilisateur = @utilisateur;", Connection); // faut récupérer l'id de la fiche de frai en utilisant l'id utilisateur 
+                "WHERE fdf.id_utilisateur = @utilisateur " +
+                "AND fdf.date_creation <= @dateNow " +
+                "AND @dateNow <= fdf.date_fin ", Connection); // faut récupérer l'id de la fiche de frai en utilisant l'id utilisateur 
+
             cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
+            cmd.Parameters.AddWithValue("@dateNow", DateActustring);
 
             MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
 
@@ -245,27 +366,96 @@ namespace AP1_GSB_BTS_SIO
 
             Actualiser();
         }
+
         #endregion
         //
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        // Bouton pour afficher la fiche choisit par ID 
+        #region
+        private void AfficherFicheparID(object sender, EventArgs e)
         {
+            ConnectionBDD();
 
+            ListviewFrais.Items.Clear();
+
+            if (IDselection != "")
+            {
+
+                // On Récupère donnee Frais Forfais de la fiche selectionné
+
+                MySqlCommand cmd = new MySqlCommand("" +
+                "SELECT ff.Valeur, ff.date_frais, tf.nom, ff.Motif " +
+                "FROM `fiche_de_frais` fdf " +
+                "left join `frais_forfait` ff on fdf.id_fiche_frais = ff.id_fiche_frais " +
+                "left join `type_frais` tf on ff.id_type = tf.id_type " +
+                "WHERE fdf.id_utilisateur = @utilisateur " +
+                "AND fdf.id_fiche_frais = @IDselection", Connection);
+
+                cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
+                cmd.Parameters.AddWithValue("@IDselection", IDselection);
+
+                MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
+
+                while (LecteurDonnee.Read())
+                {
+                    ListViewItem FraisForfait = new ListViewItem(
+
+                    LecteurDonnee["nom"].ToString());
+                    FraisForfait.SubItems.Add(LecteurDonnee["Valeur"].ToString());
+                    FraisForfait.SubItems.Add(LecteurDonnee["date_frais"].ToString());
+                    FraisForfait.SubItems.Add(LecteurDonnee["Motif"].ToString());
+
+                    ListviewFrais.Items.Add(FraisForfait);
+                }
+
+                LecteurDonnee.Close();
+
+                ListViewHorsForfait.Items.Clear();
+
+                // On récupère les donnee Frais Hors Forfait de la fiche selectionné
+
+                cmd = new MySqlCommand("" +
+                "SELECT fhf.nom, fhf.valeur, fhf.date_frais " +
+                "FROM `fiche_de_frais` fdf " +
+                "left join `frais_hors_forfait` fhf on fhf.id_fiche_frais = fdf.id_fiche_frais " +
+                "WHERE fdf.id_utilisateur = @utilisateur " +
+                "AND fdf.id_fiche_frais = @IDselection", Connection);
+
+                cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
+                cmd.Parameters.AddWithValue("@IDselection", IDselection);
+
+                try
+                {
+                    LecteurDonnee = cmd.ExecuteReader();
+
+                    while (LecteurDonnee.Read())
+                    {
+                        ListViewItem FraisHForfait = new ListViewItem(
+
+                        LecteurDonnee["nom"].ToString());
+                        FraisHForfait.SubItems.Add(LecteurDonnee["valeur"].ToString());
+                        FraisHForfait.SubItems.Add(LecteurDonnee["date_frais"].ToString());
+
+                        ListViewHorsForfait.Items.Add(FraisHForfait);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Aucun éléments");
+                }
+
+                LecteurDonnee.Close();
+            }
+
+            DeconnectionBDD();
         }
 
-        private void DateDepart_Click(object sender, EventArgs e)
+        private void ListeIdFichesComboBox(object sender, EventArgs e)
         {
-            MessageBox.Show("hoho surprise;");
+            IDselection = ListeIdFiches.Text;
         }
 
-        private void ListViewToutesLesFiches(object sender, EventArgs e)
-        {
-            MessageBox.Show("double clicks !!");
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
+        //
     }
 }
