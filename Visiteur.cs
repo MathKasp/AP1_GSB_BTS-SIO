@@ -18,12 +18,13 @@ namespace AP1_GSB_BTS_SIO
     {
 
         // Vars par défaut
-
+        #region
         private int idUtilisateur;
 
         DateTime dateActuel = DateTime.Now;
 
         string IDselection = "";
+        #endregion
         //
 
         public Visiteur(int idUtilisateur)
@@ -72,24 +73,34 @@ namespace AP1_GSB_BTS_SIO
             ListviewFrais.Items.Clear();
 
             // On test la date de fin de la fiche actuel (si on trouve pas de fiche a jour var = false sinon var = true
-            MySqlCommand cmd = new MySqlCommand ("SELECT date_fin FROM `fiche_de_frais`;", Connection);
+            MySqlCommand cmd = new MySqlCommand ("SELECT date_fin FROM `fiche_de_frais` WHERE id_utilisateur = @utilisateur;", Connection);
+
+            cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
 
             MySqlDataReader LecteurDonnee = cmd.ExecuteReader();
 
             bool FicheAJourExiste = false;
-            while (LecteurDonnee.Read())
+            if (LecteurDonnee.Read())
             {
-                DateTime datefin = DateTime.Parse(LecteurDonnee["date_fin"].ToString()); // A chaque date trouvée on en fait une valeur DateTime a comparer avec la valeur de la date actuelle
-                if (datefin > dateActuel)
+                while (LecteurDonnee.Read())
                 {
-                    FicheAJourExiste = true;
+                    DateTime datefin = DateTime.Parse(LecteurDonnee["date_fin"].ToString()); // A chaque date trouvée on en fait une valeur DateTime a comparer avec la valeur de la date actuelle
+                    if (datefin > dateActuel)
+                    {
+                        FicheAJourExiste = true;
+                    }
                 }
             }
+            else
+            {
+                CreationFiche();
+            }
+
             //
 
             if (FicheAJourExiste == false)
             {
-                cmd = new MySqlCommand("UPDATE `fiche_de_frais`fdf SET id_etat = 1 WHERE fdf.id_etat = 2;");
+                cmd = new MySqlCommand("UPDATE `fiche_de_frais`fdf SET id_etat = 1 WHERE fdf.id_etat = 2;", Connection);
 
                 cmd.ExecuteNonQuery();
 
@@ -186,7 +197,9 @@ namespace AP1_GSB_BTS_SIO
 
             ListeIdFiches.Items.Clear();
 
-            cmd = new MySqlCommand("SELECT fdf.id_fiche_frais FROM `fiche_de_frais` fdf ;", Connection);
+            cmd = new MySqlCommand("SELECT fdf.id_fiche_frais FROM `fiche_de_frais` fdf WHERE fdf.id_utilisateur = @utilisateur;", Connection);
+
+            cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
 
             LecteurDonnee = cmd.ExecuteReader();
 
@@ -309,7 +322,10 @@ namespace AP1_GSB_BTS_SIO
 
             ListViewFichesUtiliateur.Items.Clear();
 
-            MySqlCommand cmd = new MySqlCommand("SELECT fdf.date_creation, fdf.date_fin, fdf.id_fiche_frais, e.etat FROM `fiche_de_frais` fdf LEFT JOIN `etat` e ON fdf.id_etat = e.id_etat AND fdf.id_utilisateur = @utilisateur;", Connection);
+            MySqlCommand cmd = new MySqlCommand("" +
+                "SELECT fdf.date_creation, fdf.date_fin, fdf.id_fiche_frais, e.etat " +
+                "FROM `fiche_de_frais` fdf LEFT JOIN `etat` e ON fdf.id_etat = e.id_etat " +
+                "WHERE fdf.id_utilisateur = @utilisateur;", Connection);
 
             cmd.Parameters.AddWithValue("@utilisateur", idUtilisateur);
 

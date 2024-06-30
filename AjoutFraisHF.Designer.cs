@@ -283,7 +283,6 @@
             this.ValeurDuFrais.Size = new System.Drawing.Size(193, 33);
             this.ValeurDuFrais.TabIndex = 0;
             this.ValeurDuFrais.Text = "";
-            this.ValeurDuFrais.TextChanged += new System.EventHandler(this.Valeurfrais);
             // 
             // AjoutFraisHF
             // 

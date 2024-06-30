@@ -15,32 +15,36 @@ namespace AP1_GSB_BTS_SIO
     {
 
         // Var par def
-        public int ValeurK {  get; set; }
+        #region
+        public double ValeurK {  get; set; }
+        #endregion
         //
         public KiloUtilFrais()
         {
             InitializeComponent();
         }
 
-        private void TextnmbK(object sender, EventArgs e)
+        // Bouton Valider
+        #region
+        private void Valider(object sender, EventArgs e)
         {
             string Valeur = TextNmbKilometres.Text;
+
             ValeurK = 0;
+            Valeur.Replace(",", "."); // Ne fonctionne pas
 
             try
             {
-                ValeurK = Convert.ToInt32(Valeur); // on converti l'entrée de l'utilisateur en double
+                ValeurK = Convert.ToDouble(Valeur); // on converti l'entrée de l'utilisateur en double
             }
             catch (Exception msg) // si ca ne fonctionne pas réinitialisation
             {
                 MessageBox.Show("La valeur entrée est incorrecte, n'est attendu que les chiffres / nombres avec ou sans virgule.");
-                TextNmbKilometres.Text = "";
             }
-        }
 
-        private void Valider(object sender, EventArgs e)
-        {
             this.Close();
         }
+        #endregion
+        //
     }
 }

@@ -105,7 +105,7 @@ namespace AP1_GSB_BTS_SIO
         #endregion
         //
 
-        // valider les critères saisis
+        // valider les critères saisis 
         #region
         private void Ajouter(object sender, EventArgs e)
         {

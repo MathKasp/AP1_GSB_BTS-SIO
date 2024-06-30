@@ -72,7 +72,6 @@
             this.TextNmbKilometres.Size = new System.Drawing.Size(199, 35);
             this.TextNmbKilometres.TabIndex = 0;
             this.TextNmbKilometres.Text = "";
-            this.TextNmbKilometres.TextChanged += new System.EventHandler(this.TextnmbK);
             // 
             // label4
             // 

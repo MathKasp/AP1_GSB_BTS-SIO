@@ -76,6 +76,18 @@ namespace AP1_GSB_BTS_SIO
         {
             ConnectionBDD();
 
+            string Valeur = ValeurDuFrais.Text;
+
+            try
+            {
+                montantfrais = Convert.ToDouble(Valeur); // on converti l'entrée de l'utilisateur en double
+            }
+            catch (Exception msg) // si ca ne fonctionne pas réinitialisation
+            {
+                MessageBox.Show("La valeur entrée est incorrecte, n'est attendu que les chiffres / nombres avec ou sans virgule.");
+                ValeurDuFrais.Text = "";
+            }
+
             try
             {
                 if (montantfrais == 0 || motif_frais == "" || datefrais == "")
@@ -107,30 +119,13 @@ namespace AP1_GSB_BTS_SIO
         //
 
 
-        // 3 valeurs entrées par le visiteur pour son ajout (motif_frais, Datefrais, Montantfrais)
-        #region
+        // 3 valeurs entrées par le visiteur pour son ajout  (Datefrais, Montantfrais) => La troisième entrée se fait sur l'ajout
+        #region 
 
         // Contient le Motif
         private void TextMotif(object sender, EventArgs e)
         {
             motif_frais = TextMotifFrais.Text;
-        }
-        //
-
-        // Contient la valeur entrée pour le frais
-        private void Valeurfrais(object sender, EventArgs e)
-        {
-            string Valeur = ValeurDuFrais.Text;
-
-            try
-            {
-                montantfrais = Convert.ToDouble(Valeur); // on converti l'entrée de l'utilisateur en double
-            }
-            catch (Exception msg) // si ca ne fonctionne pas réinitialisation
-            {
-                MessageBox.Show("La valeur entrée est incorrecte, n'est attendu que les chiffres / nombres avec ou sans virgule.");
-                ValeurDuFrais.Text = "";
-            }
         }
         //
 
@@ -171,6 +166,7 @@ namespace AP1_GSB_BTS_SIO
 
             DeconnectionBDD();
         }
+
         #endregion
         //
     }

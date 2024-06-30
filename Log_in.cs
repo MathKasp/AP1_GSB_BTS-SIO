@@ -15,15 +15,15 @@ using MySqlX.XDevAPI.Relational;
 namespace AP1_GSB_BTS_SIO
 {
     public partial class Log_in : Form
-    {
-        // Option Co et Deco de la  BDD
-        #region
-        public MySqlConnection Connection;
+    {  
         public Log_in()
         {
             InitializeComponent();
         }
 
+        // Option Co et Deco de la  BDD
+        #region
+        public MySqlConnection Connection;
         private void ConnectionBDD()
         {
             try
@@ -43,13 +43,13 @@ namespace AP1_GSB_BTS_SIO
             Connection.Close(); 
         }
         #endregion
-        //
+        // 
 
-        // Outillage des composants du form 
-
-        // Variables par défault de la selection de l'utilisateur
+        // Variables par défault
+        #region
         public string nom = "";
         public string mdp = "";
+        #endregion
         //
 
         // Validation NOM / MDP du log in
@@ -60,9 +60,14 @@ namespace AP1_GSB_BTS_SIO
 
             MySqlCommand cmd = new MySqlCommand("" +
                 "SELECT * FROM `utilisateur` " +
-                "WHERE nom = '" + nom +"' AND mdp = '" +mdp+"';", Connection);
+                "WHERE nom = @nom " +
+                "AND mdp = @mdp; ", Connection);
+
+            cmd.Parameters.AddWithValue("@nom", nom);
+            cmd.Parameters.AddWithValue("@mdp", mdp);
 
             MySqlDataReader Utilisateur = cmd.ExecuteReader();
+
             if (Utilisateur.Read())
             {
                 int idUtilisateur = Utilisateur.GetInt32("id_utilisateur");
@@ -92,10 +97,14 @@ namespace AP1_GSB_BTS_SIO
                         break;
                 }
             }
+            else
+            {
+                MessageBox.Show("Identifiant ou Mot de passe incorrecte");
+            }
 
             DeconnectionBDD();
-            #endregion
         }
+        #endregion
         //
 
         // Outillage du form
@@ -114,7 +123,7 @@ namespace AP1_GSB_BTS_SIO
         }
 
         // Bouton pour fermer l'appli
-        private void button_Close(object sender, EventArgs e)
+        private void BoutonFermer(object sender, EventArgs e)
         {
             Application.Exit();
         }
