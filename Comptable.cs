@@ -317,7 +317,9 @@ namespace AP1_GSB_BTS_SIO
                     break;
             }
 
-            MySqlCommand cmd = new MySqlCommand("UPDATE `fiche_de_frais` fdf SET id_etat = @selecEtat WHERE fdf.id_fiche_frais = @selecID;", Connection);
+            MySqlCommand cmd = new MySqlCommand("" +
+                "UPDATE `fiche_de_frais` fdf SET id_etat = @selecEtat " +
+                "WHERE fdf.id_fiche_frais = @selecID;", Connection);
 
             cmd.Parameters.AddWithValue("@selecID",selectionID);
             cmd.Parameters.AddWithValue("@selecEtat", selectionEtat);

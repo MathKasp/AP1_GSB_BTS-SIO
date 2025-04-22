@@ -97,9 +97,12 @@ namespace AP1_GSB_BTS_SIO
             }
 
             //
+            DeconnectionBDD();
 
             if (FicheAJourExiste == false)
             {
+                ConnectionBDD();
+
                 cmd = new MySqlCommand("UPDATE `fiche_de_frais`fdf SET id_etat = 1 WHERE fdf.id_etat = 2;", Connection);
 
                 cmd.ExecuteNonQuery();
@@ -110,17 +113,18 @@ namespace AP1_GSB_BTS_SIO
 
             }
 
-            DeconnectionBDD();
+            //DeconnectionBDD();
 
             #endregion
             //
+
+            ConnectionBDD();
 
             // Remplissage des deux espace Frais forfait et Frais Hors forfais
             #region
 
             // On Récupère donnee Frais Forfais
 
-            ConnectionBDD();
 
             string DateActustring = dateActuel.ToString("yyyy-MM-dd"); // Préciser format
 
