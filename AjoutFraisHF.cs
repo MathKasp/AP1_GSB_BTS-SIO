@@ -39,7 +39,7 @@ namespace AP1_GSB_BTS_SIO
         {
             try
             {
-                string connectionString = "server=127.0.0.1;uid=root;pwd=root;database=ap1_sql";
+                string connectionString = "server=127.0.0.1;port=3307;uid=root;pwd=root;database=ap1bdd";
                 Connection = new MySqlConnection(connectionString);
                 Connection.Open();
             }
