@@ -330,6 +330,11 @@ namespace AP1_GSB_BTS_SIO
 
             Actualiser();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion
         //
     }
