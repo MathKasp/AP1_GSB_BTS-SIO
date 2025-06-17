@@ -28,7 +28,8 @@ namespace AP1_GSB_BTS_SIO
         {
             try
             {
-                string connectionString = "server=127.0.0.1;port=3307;uid=root;pwd=root;database=ap1bdd"; // chaine de connection locale
+                string connectionString = "server=127.0.0.1;port=3307;uid=root;pwd=root;database=ap1bdd"; //"server=127.0.0.1;uid=root;pwd=root;database=ap1_sql"; (connection vers mysql web)
+
                 Connection = new MySqlConnection(connectionString);
                 Connection.Open();
             }

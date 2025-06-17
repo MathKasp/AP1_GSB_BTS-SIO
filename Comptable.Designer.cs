@@ -300,6 +300,7 @@
             this.ChoixID.Name = "ChoixID";
             this.ChoixID.Size = new System.Drawing.Size(171, 24);
             this.ChoixID.TabIndex = 20;
+            this.ChoixID.SelectedIndexChanged += new System.EventHandler(this.ChoixID_SelectedIndexChanged);
             // 
             // label4
             // 

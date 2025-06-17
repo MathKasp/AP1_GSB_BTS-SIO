@@ -335,6 +335,11 @@ namespace AP1_GSB_BTS_SIO
         {
 
         }
+
+        private void ChoixID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         #endregion
         //
     }
